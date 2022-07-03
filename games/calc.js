@@ -1,5 +1,6 @@
 import readlineSync from 'readline-sync';
 import greetings from '../src/cli.js';
+import randomNumber from '../src/index.js';
 
 function resultOfExpression(leftNumb, rightNumb, opr) {
   let result;
@@ -22,10 +23,6 @@ function resultOfExpression(leftNumb, rightNumb, opr) {
 
 const arrayOfOperator = ['+', '-', '*'];
 
-function randomNumber(range) {
-  return Math.floor(Math.random() * range);
-}
-
 function calc() {
   //  \\\\\приветствие \ПОВТОР\
   const name = greetings();
@@ -33,12 +30,6 @@ function calc() {
   //  {{{Здесь новое
   console.log('What is the result of the expression?');
 
-  // const correctAnswerFunction = (number) => {
-  //   const result = number % 2 === 0 ? 'yes' : 'no';
-  //   return result;
-  // };
-
-  //  \\\\\\ВСЕГДА ТРИ ВОПРОСА-ОТВЕТА
   for (let i = 0; i < 3; i += 1) {
     // {{{const randomNumber = Math.floor(Math.random() * 100);
 
@@ -70,12 +61,3 @@ was '${correctAnswer}'.\nLet's try again, ${name}!`);
 }
 
 export default calc;
-
-// - bin/games/brain-game
-// - bin/games/brain-even
-// - bin/games/brain-calc
-
-// - src/cli.js
-// - src/even.js
-// - src/calc.js
-// - src/index.js

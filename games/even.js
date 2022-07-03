@@ -1,5 +1,6 @@
 import readlineSync from 'readline-sync';
 import greetings from '../src/cli.js';
+import randomNumber from '../src/index.js';
 
 function quiz() {
   const name = greetings();
@@ -11,10 +12,10 @@ function quiz() {
   };
 
   for (let i = 0; i < 3; i += 1) {
-    const randomNumber = Math.floor(Math.random() * 100);
-    console.log(`Question: ${randomNumber}`);
+    const number = randomNumber(1000);
+    console.log(`Question: ${number}`);
     const answer = readlineSync.question('Your answer: ');
-    const correctAnswer = correctAnswerFunction(randomNumber);
+    const correctAnswer = correctAnswerFunction(number);
     if (correctAnswer === answer) {
       console.log('Correct!');
     } else {
