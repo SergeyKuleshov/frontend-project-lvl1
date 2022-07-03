@@ -1,5 +1,5 @@
 import readlineSync from 'readline-sync';
-import greetings from './cli.js';
+import greetings from '../src/cli.js';
 
 function resultOfExpression(leftNumb, rightNumb, opr) {
   let result;
@@ -22,11 +22,9 @@ function resultOfExpression(leftNumb, rightNumb, opr) {
 
 const arrayOfOperator = ['+', '-', '*'];
 
-
 function randomNumber(range) {
   return Math.floor(Math.random() * range);
 }
-
 
 function calc() {
   //  \\\\\приветствие \ПОВТОР\

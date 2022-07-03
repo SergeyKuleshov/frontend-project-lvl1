@@ -1,5 +1,5 @@
 import readlineSync from 'readline-sync';
-import greetings from './cli.js';
+import greetings from '../src/cli.js';
 
 function quiz() {
   const name = greetings();
