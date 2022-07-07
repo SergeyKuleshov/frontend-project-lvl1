@@ -7,3 +7,6 @@ src="https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability"
 
 ### Brain-even (Asciinema)
 https://asciinema.org/a/XKxy5aBmSSFXRNwJvmqnbvhqb
+
+### Brain-gcd (Asciinema)
+https://asciinema.org/a/ZL5E4pYjfP4fbFEouyc9cDkJf
