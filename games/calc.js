@@ -1,63 +1,63 @@
-import readlineSync from 'readline-sync';
-import greetings from '../src/cli.js';
-import randomNumber from '../src/index.js';
+import { engine, randomNumber } from '../src/index.js';
 
-function resultOfExpression(leftNumb, rightNumb, opr) {
-  let result;
-  switch (opr) {
-    case '+':
-      result = leftNumb + rightNumb;
-      break;
-    case '-':
-      result = leftNumb - rightNumb;
-      break;
-    case '*':
-      result = leftNumb * rightNumb;
-      break;
-    default:
-      result = NaN;
-      break;
+// engine(rules, arrayCorrectAnswers, questions);
+
+const rules = 'What is the result of the expression?';
+
+const operators = ['+', '-', '*'];
+
+function getRandomArraysOfExpressions() {
+  const arrayOfExpressions = [];
+  let count = 0;
+  while (count < 3) {
+    const firstNumber = randomNumber(100);
+    const secondNumber = randomNumber(100);
+    const operator = operators[randomNumber(3)];
+    arrayOfExpressions.push([firstNumber, operator, secondNumber]);
+    count += 1;
   }
-  return result;
+  return arrayOfExpressions;
 }
 
-const arrayOfOperator = ['+', '-', '*'];
+const arrayOfExpressions = getRandomArraysOfExpressions();
+
+function getCorrectAnswer(firstN, opr, secondN) {
+  switch (opr) {
+    case '+':
+      return firstN + secondN;
+    case '-':
+      return firstN - secondN;
+    case '*':
+      return firstN * secondN;
+    default:
+      console.log('Дефолт произойти не может, но линтер требует');
+  }
+}
+
+function getCorrectAnswersArray() {
+  let correctAnswers = [];
+  for (const partOfExpression of arrayOfExpressions) {
+    const [firstNumber, operator, secondNumber] = partOfExpression;
+    correctAnswers.push(String(getCorrectAnswer(firstNumber, operator, secondNumber)));
+  }
+  return correctAnswers;
+}
+
+const arrayCorrectAnswers = getCorrectAnswersArray();
+
+function getQuestions() {
+  let questions = [];
+  for (const partOfExpression of arrayOfExpressions) {
+    const [firstNumber, operator, secondNumber] = partOfExpression;
+    questions.push(`Questin: ${firstNumber} ${operator} ${secondNumber}`);
+  }
+  return questions;
+}
+
+const questions = getQuestions();
 
 function calc() {
-  //  \\\\\приветствие \ПОВТОР\
-  const name = greetings();
-
-  //  {{{Здесь новое
-  console.log('What is the result of the expression?');
-
-  for (let i = 0; i < 3; i += 1) {
-    // {{{const randomNumber = Math.floor(Math.random() * 100);
-
-    // {{{ блок с индивидуальной логикой
-    const leftNumber = randomNumber(3);
-    const rightNumber = randomNumber(3);
-    const indexOfOperator = randomNumber(3);
-    const operator = arrayOfOperator[indexOfOperator];
-
-    // console.log(`Question: ${randomNumber}`);
-    console.log(`Question: ${leftNumber} ${operator} ${rightNumber}`);
-
-    //  \\\\\Вопрос и получение ответа \повтор\
-    const answer = Number(readlineSync.question('Your answer: '));
-
-    //  const correctAnswer = correctAnswerFunction(randomNumber);
-    const correctAnswer = resultOfExpression(leftNumber, rightNumber, operator);
-
-    //  \\\\\Проверка на правильность ответа. Поздравление или проигрыш -
-    //  \все повторяется\
-    if (correctAnswer === answer) {
-      console.log('Correct!');
-    } else {
-      return console.log(`'${answer}' is wrong answer ;(. Correct answer 
-was '${correctAnswer}'.\nLet's try again, ${name}!`);
-    }
-  }
-  return console.log(`Congratulations, ${name}!`);
+  engine(rules, arrayCorrectAnswers, questions);
 }
 
 export default calc;

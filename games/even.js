@@ -1,28 +1,46 @@
-import readlineSync from 'readline-sync';
-import greetings from '../src/cli.js';
-import randomNumber from '../src/index.js';
+import { engine, randomNumber } from '../src/index.js';
 
-function quiz() {
-  const name = greetings();
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
+const rules = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-  const correctAnswerFunction = (number) => {
-    const result = number % 2 === 0 ? 'yes' : 'no';
-    return result;
-  };
-
-  for (let i = 0; i < 3; i += 1) {
-    const number = randomNumber(1000);
-    console.log(`Question: ${number}`);
-    const answer = readlineSync.question('Your answer: ');
-    const correctAnswer = correctAnswerFunction(number);
-    if (correctAnswer === answer) {
-      console.log('Correct!');
-    } else {
-      return console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${name}!`);
-    }
+function getRandomNumbersArray() {
+  const randomNumbersArray = [];
+  let count = 0;
+  while (count < 3) {
+    randomNumbersArray.push(randomNumber(100));
+    count += 1;
   }
-  return console.log(`Congratulations, ${name}!`);
+  return randomNumbersArray;
 }
 
-export default quiz;
+const numbersArray = getRandomNumbersArray();
+
+function getCorrectAnswer(number) {
+  const result = number % 2 === 0 ? 'yes' : 'no';
+  return result;
+}
+
+function getArrayCorrectAnswers(arr) {
+  const arrayCorrectAnswers = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    arrayCorrectAnswers.push(getCorrectAnswer(arr[i]));
+  }
+  return arrayCorrectAnswers;
+}
+
+const arrayCorrectAnswers = getArrayCorrectAnswers(numbersArray);
+
+function evenQuestions(arr) {
+  const questionsArray = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    questionsArray.push(`Question: ${arr[i]}`);
+  }
+  return questionsArray;
+}
+
+const questions = evenQuestions(numbersArray);
+
+function even() {
+  engine(rules, arrayCorrectAnswers, questions);
+}
+
+export default even;
