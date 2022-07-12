@@ -1,8 +1,14 @@
 import readlineSync from 'readline-sync';
 import greetings from './cli.js';
 
-function randomNumber(range) {
-  return Math.floor(Math.random() * range);
+function randomNumber(range, minNumber) {
+  let result = Math.floor(Math.random() * range);
+  if (minNumber) {
+    if (result < minNumber) {
+      result = randomNumber(range, minNumber);
+    }
+  }
+  return result;
 }
 
 function engine(rules, correctAnswers, questions) {
