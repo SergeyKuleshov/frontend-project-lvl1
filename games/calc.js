@@ -30,12 +30,12 @@ function getCorrectAnswer(firstN, opr, secondN) {
     case '*':
       return firstN * secondN;
     default:
-      console.log('Дефолт произойти не может, но линтер требует');
+      return console.log('Дефолт произойти не может, но линтер требует');
   }
 }
 
 function getCorrectAnswersArray() {
-  let correctAnswers = [];
+  const correctAnswers = [];
   for (const partOfExpression of arrayOfExpressions) {
     const [firstNumber, operator, secondNumber] = partOfExpression;
     correctAnswers.push(String(getCorrectAnswer(firstNumber, operator, secondNumber)));
@@ -46,10 +46,10 @@ function getCorrectAnswersArray() {
 const arrayCorrectAnswers = getCorrectAnswersArray();
 
 function getQuestions() {
-  let questions = [];
+  const questions = [];
   for (const partOfExpression of arrayOfExpressions) {
     const [firstNumber, operator, secondNumber] = partOfExpression;
-    questions.push(`Questin: ${firstNumber} ${operator} ${secondNumber}`);
+    questions.push(`Question: ${firstNumber} ${operator} ${secondNumber}`);
   }
   return questions;
 }
