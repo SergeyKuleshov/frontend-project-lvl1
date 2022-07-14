@@ -31,10 +31,10 @@ function getCorrectAnswer(firstNumber, secondNumber) {
 
 function getArrayCorrectAnswer(twoDimensionsArray) {
   const resultArray = [];
-  for (const array of twoDimensionsArray) {
-    const [firstNumber, secondNumber] = array;
+  twoDimensionsArray.forEach((arrayWithTwoNumbersForGcd) => {
+    const [firstNumber, secondNumber] = arrayWithTwoNumbersForGcd;
     resultArray.push(getCorrectAnswer(firstNumber, secondNumber));
-  }
+  });
   return resultArray;
 }
 
@@ -42,11 +42,11 @@ const arrayCorrectAnswers = getArrayCorrectAnswer(numbersForGcd);
 
 function getGcdQuestions(twoDimensionsArray) {
   const resultArray = [];
-  for (const array of twoDimensionsArray) {
-    const [firstNumber, secondNumber] = array;
+  twoDimensionsArray.forEach((arrayWithTwoNumbersForGcd) => {
+    const [firstNumber, secondNumber] = arrayWithTwoNumbersForGcd;
     const strQuestion = `Question: ${firstNumber} ${secondNumber}`;
     resultArray.push(strQuestion);
-  }
+  });
   return resultArray;
 }
 

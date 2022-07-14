@@ -28,27 +28,27 @@ function isPrime(number) {
   return true;
 }
 
-function getCorrectAnswers() {
+function getCorrectAnswers(arrayOfNumbers) {
   const resultArray = [];
-  for (const number of randomNumbersArray) {
+  arrayOfNumbers.forEach((number) => {
     const correctAnswer = isPrime(number) ? 'yes' : 'no';
     resultArray.push(correctAnswer);
-  }
+  });
   return resultArray;
 }
 
-const correctAnswers = getCorrectAnswers();
+const correctAnswers = getCorrectAnswers(randomNumbersArray);
 
-function getQuestions() {
+function getQuestions(arrayOfNumbers) {
   const resultArray = [];
-  for (const number of randomNumbersArray) {
+  arrayOfNumbers.forEach((number) => {
     const question = `Question: ${number}`;
     resultArray.push(question);
-  }
+  });
   return resultArray;
 }
 
-const questions = getQuestions();
+const questions = getQuestions(randomNumbersArray);
 
 export default function prime() {
   engine(rules, correctAnswers, questions);

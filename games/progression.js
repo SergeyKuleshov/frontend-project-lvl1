@@ -31,10 +31,10 @@ const sequencesArray = getRandomSequencesArray();
 
 function getArrayOfIndexForHiddenNumber(arrayOfArraysSequence) {
   const resultArray = [];
-  for (const arrayOfSequences of arrayOfArraysSequence) {
+  arrayOfArraysSequence.forEach((arrayOfSequences) => {
     const randomIndexOfArray = randomNumber(arrayOfSequences.length);
     resultArray.push(randomIndexOfArray);
-  }
+  });
   return resultArray;
 }
 
@@ -63,12 +63,11 @@ hideTheItems();
 
 function getQuestions(twoDimensionArray) {
   const resultArray = [];
-  let stringProgression = '';
-  for (const array of twoDimensionArray) {
-    stringProgression = array.join(' ');
+  twoDimensionArray.forEach((arrayProgression) => {
+    const stringProgression = arrayProgression.join(' ');
     const question = `Question: ${stringProgression}`;
     resultArray.push(question);
-  }
+  });
   return resultArray;
 }
 

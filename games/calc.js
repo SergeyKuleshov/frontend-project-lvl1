@@ -34,27 +34,28 @@ function getCorrectAnswer(firstN, opr, secondN) {
   }
 }
 
-function getCorrectAnswersArray() {
+function getCorrectAnswersArray(twoDimensionsArray) {
   const correctAnswers = [];
-  for (const partOfExpression of arrayOfExpressions) {
+  twoDimensionsArray.forEach((partOfExpression) => {
     const [firstNumber, operator, secondNumber] = partOfExpression;
-    correctAnswers.push(String(getCorrectAnswer(firstNumber, operator, secondNumber)));
-  }
+    const stringCorrectAnswer = String(getCorrectAnswer(firstNumber, operator, secondNumber));
+    correctAnswers.push(stringCorrectAnswer);
+  });
   return correctAnswers;
 }
 
-const arrayCorrectAnswers = getCorrectAnswersArray();
+const arrayCorrectAnswers = getCorrectAnswersArray(arrayOfExpressions);
 
-function getQuestions() {
+function getQuestions(twoDimensionsArray) {
   const questions = [];
-  for (const partOfExpression of arrayOfExpressions) {
+  twoDimensionsArray.forEach((partOfExpression) => {
     const [firstNumber, operator, secondNumber] = partOfExpression;
     questions.push(`Question: ${firstNumber} ${operator} ${secondNumber}`);
-  }
+  });
   return questions;
 }
 
-const questions = getQuestions();
+const questions = getQuestions(arrayOfExpressions);
 
 function calc() {
   engine(rules, arrayCorrectAnswers, questions);
