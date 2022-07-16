@@ -1,9 +1,9 @@
 import { engine, randomNumber } from '../src/index.js';
 
-const rules = 'What number is missing in the progression?';
+const rule = 'What number is missing in the progression?';
 
-function getRandomSequencesArray() {
-  const resultArray = [];
+function getRandomSequences() {
+  const sequences = [];
   let count = 0;
 
   while (count < 3) {
@@ -12,67 +12,67 @@ function getRandomSequencesArray() {
     const start = randomNumber(100);
     const step = randomNumber(10, 2);
 
-    const arrayProgression = [start];
+    const sequenceOfNumbers = [start];
 
     let numberInTheSequence = start;
 
     for (let i = 0; i < sequenceLength - 1; i += 1) {
       numberInTheSequence += step;
-      arrayProgression.push(numberInTheSequence);
+      sequenceOfNumbers.push(numberInTheSequence);
     }
-    resultArray.push(arrayProgression);
+    sequences.push(sequenceOfNumbers);
 
     count += 1;
   }
-  return resultArray;
+  return sequences;
 }
 
-const sequencesArray = getRandomSequencesArray();
+const sequences = getRandomSequences();
 
-function getArrayOfIndexForHiddenNumber(arrayOfArraysSequence) {
-  const resultArray = [];
-  arrayOfArraysSequence.forEach((arrayOfSequences) => {
-    const randomIndexOfArray = randomNumber(arrayOfSequences.length);
-    resultArray.push(randomIndexOfArray);
+function getRandomIndicesForHiddenNumber(sequencesOfNumbers) {
+  const indices = [];
+  sequencesOfNumbers.forEach((arrayOfSequences) => {
+    const randomIndex = randomNumber(arrayOfSequences.length);
+    indices.push(randomIndex);
   });
-  return resultArray;
+  return indices;
 }
 
-const indicesForHiddenNumber = getArrayOfIndexForHiddenNumber(sequencesArray);
+const indicesForHiddenNumber = getRandomIndicesForHiddenNumber(sequences);
 
-function correctAnswersArray() {
+function getCorrectAnswers(indices, sequencesOfNumbers) {
   const correctAnswers = [];
   for (let i = 0; i < 3; i += 1) {
-    const indexOfCurrentHiddenNumber = indicesForHiddenNumber[i];
-    const stringCorrectAnswer = String(sequencesArray[i][indexOfCurrentHiddenNumber]);
+    const indexOfCurrentHiddenNumber = indices[i];
+    const stringCorrectAnswer = String(sequencesOfNumbers[i][indexOfCurrentHiddenNumber]);
     correctAnswers.push(stringCorrectAnswer);
   }
   return correctAnswers;
 }
 
-const correctAnswers = correctAnswersArray();
+const correctAnswers = getCorrectAnswers(indicesForHiddenNumber, sequences);
 
-function hideTheItems() {
-  for (let i = 0; i < sequencesArray.length; i += 1) {
-    const indexOfCurrentHiddenNumber = indicesForHiddenNumber[i];
-    sequencesArray[i][indexOfCurrentHiddenNumber] = '..';
+function hideTheItems(indices) {
+  for (let i = 0; i < sequences.length; i += 1) {
+    const indexOfCurrentHiddenNumber = indices[i];
+    sequences[i][indexOfCurrentHiddenNumber] = '..';
   }
 }
 
-hideTheItems();
+hideTheItems(indicesForHiddenNumber);
 
-function getQuestions(twoDimensionArray) {
-  const resultArray = [];
-  twoDimensionArray.forEach((arrayProgression) => {
-    const stringProgression = arrayProgression.join(' ');
+function getQuestions(sequencesOfNumbers) {
+  const questions = [];
+  sequencesOfNumbers.forEach((sequnce) => {
+    const stringProgression = sequnce.join(' ');
     const question = `Question: ${stringProgression}`;
-    resultArray.push(question);
+    questions.push(question);
   });
-  return resultArray;
+  return questions;
 }
 
-const questions = getQuestions(sequencesArray);
+const questions = getQuestions(sequences);
 
 export default function progression() {
-  engine(rules, correctAnswers, questions);
+  engine(rule, correctAnswers, questions);
 }

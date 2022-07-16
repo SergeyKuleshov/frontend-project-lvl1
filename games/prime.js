@@ -1,19 +1,19 @@
 import { engine, randomNumber } from '../src/index.js';
 
-const rules = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+const rule = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
-function getRandomNumbersArray() {
-  const resultArray = [];
+function getRandomNumbers() {
+  const randomNumbers = [];
   let count = 0;
   while (count < 3) {
     const randomNumb = randomNumber(100, 2);
-    resultArray.push(randomNumb);
+    randomNumbers.push(randomNumb);
     count += 1;
   }
-  return resultArray;
+  return randomNumbers;
 }
 
-const randomNumbersArray = getRandomNumbersArray();
+const randomNumbers = getRandomNumbers();
 
 function isPrime(number) {
   let divideWithoutRemainder = 0;
@@ -28,28 +28,28 @@ function isPrime(number) {
   return true;
 }
 
-function getCorrectAnswers(arrayOfNumbers) {
-  const resultArray = [];
-  arrayOfNumbers.forEach((number) => {
+function getCorrectAnswers(numbers) {
+  const correctAnswers = [];
+  numbers.forEach((number) => {
     const correctAnswer = isPrime(number) ? 'yes' : 'no';
-    resultArray.push(correctAnswer);
+    correctAnswers.push(correctAnswer);
   });
-  return resultArray;
+  return correctAnswers;
 }
 
-const correctAnswers = getCorrectAnswers(randomNumbersArray);
+const correctAnswers = getCorrectAnswers(randomNumbers);
 
-function getQuestions(arrayOfNumbers) {
-  const resultArray = [];
-  arrayOfNumbers.forEach((number) => {
+function getQuestions(numbers) {
+  const questions = [];
+  numbers.forEach((number) => {
     const question = `Question: ${number}`;
-    resultArray.push(question);
+    questions.push(question);
   });
-  return resultArray;
+  return questions;
 }
 
-const questions = getQuestions(randomNumbersArray);
+const questions = getQuestions(randomNumbers);
 
 export default function prime() {
-  engine(rules, correctAnswers, questions);
+  engine(rule, correctAnswers, questions);
 }

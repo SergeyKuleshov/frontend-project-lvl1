@@ -1,20 +1,20 @@
 import { randomNumber, engine } from '../src/index.js';
 
-const gcdRules = 'Find the greatest common divisor of given numbers';
+const rule = 'Find the greatest common divisor of given numbers';
 
-function getRandomNumbersArray() {
+function getRandomNumbers() {
   let count = 0;
-  const resultArray = [];
+  const randomNumbers = [];
   while (count < 3) {
     const firstNumber = randomNumber(100);
     const secondNumber = randomNumber(100);
-    resultArray.push([firstNumber, secondNumber]);
+    randomNumbers.push([firstNumber, secondNumber]);
     count += 1;
   }
-  return resultArray;
+  return randomNumbers;
 }
 
-const numbersForGcd = getRandomNumbersArray();
+const randomNumbers = getRandomNumbers();
 
 function getCorrectAnswer(firstNumber, secondNumber) {
   let commonDivisor = 0;
@@ -29,31 +29,31 @@ function getCorrectAnswer(firstNumber, secondNumber) {
   return String(commonDivisor);
 }
 
-function getArrayCorrectAnswer(twoDimensionsArray) {
-  const resultArray = [];
-  twoDimensionsArray.forEach((arrayWithTwoNumbersForGcd) => {
-    const [firstNumber, secondNumber] = arrayWithTwoNumbersForGcd;
-    resultArray.push(getCorrectAnswer(firstNumber, secondNumber));
+function getCorrectAnswers(numbers) {
+  const correctAnswers = [];
+  numbers.forEach((twoNumbersForGcd) => {
+    const [firstNumber, secondNumber] = twoNumbersForGcd;
+    correctAnswers.push(getCorrectAnswer(firstNumber, secondNumber));
   });
-  return resultArray;
+  return correctAnswers;
 }
 
-const arrayCorrectAnswers = getArrayCorrectAnswer(numbersForGcd);
+const correctAnswers = getCorrectAnswers(randomNumbers);
 
-function getGcdQuestions(twoDimensionsArray) {
-  const resultArray = [];
-  twoDimensionsArray.forEach((arrayWithTwoNumbersForGcd) => {
-    const [firstNumber, secondNumber] = arrayWithTwoNumbersForGcd;
-    const strQuestion = `Question: ${firstNumber} ${secondNumber}`;
-    resultArray.push(strQuestion);
+function getQuestions(numbers) {
+  const quesions = [];
+  numbers.forEach((twoNumbersForGcd) => {
+    const [firstNumber, secondNumber] = twoNumbersForGcd;
+    const question = `Question: ${firstNumber} ${secondNumber}`;
+    quesions.push(question);
   });
-  return resultArray;
+  return quesions;
 }
 
-const gcdQuestions = getGcdQuestions(numbersForGcd);
+const questions = getQuestions(randomNumbers);
 
 function gcd() {
-  engine(gcdRules, arrayCorrectAnswers, gcdQuestions);
+  engine(rule, correctAnswers, questions);
 }
 
 export default gcd;

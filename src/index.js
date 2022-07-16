@@ -11,9 +11,9 @@ function randomNumber(range, minNumber) {
   return result;
 }
 
-function engine(rules, correctAnswers, questions) {
+function engine(rule, correctAnswers, questions) {
   const name = greetings();
-  console.log(rules);
+  console.log(rule);
 
   const round = 3;
   for (let i = 0; i < round; i += 1) {

@@ -1,25 +1,23 @@
 import { engine, randomNumber } from '../src/index.js';
 
-// engine(rules, arrayCorrectAnswers, questions);
-
-const rules = 'What is the result of the expression?';
+const rule = 'What is the result of the expression?';
 
 const operators = ['+', '-', '*'];
 
-function getRandomArraysOfExpressions() {
-  const arrayOfExpressions = [];
+function getRandomPartsOfTheExpressions() {
+  const partsOfTheExpressions = [];
   let count = 0;
   while (count < 3) {
     const firstNumber = randomNumber(100);
     const secondNumber = randomNumber(100);
     const operator = operators[randomNumber(3)];
-    arrayOfExpressions.push([firstNumber, operator, secondNumber]);
+    partsOfTheExpressions.push([firstNumber, operator, secondNumber]);
     count += 1;
   }
-  return arrayOfExpressions;
+  return partsOfTheExpressions;
 }
 
-const arrayOfExpressions = getRandomArraysOfExpressions();
+const randomPartsOfTheExpressions = getRandomPartsOfTheExpressions();
 
 function getCorrectAnswer(firstN, opr, secondN) {
   switch (opr) {
@@ -34,31 +32,31 @@ function getCorrectAnswer(firstN, opr, secondN) {
   }
 }
 
-function getCorrectAnswersArray(twoDimensionsArray) {
+function getCorrectAnswers(partsOfTheExpressions) {
   const correctAnswers = [];
-  twoDimensionsArray.forEach((partOfExpression) => {
-    const [firstNumber, operator, secondNumber] = partOfExpression;
+  partsOfTheExpressions.forEach((partsOfExpression) => {
+    const [firstNumber, operator, secondNumber] = partsOfExpression;
     const stringCorrectAnswer = String(getCorrectAnswer(firstNumber, operator, secondNumber));
     correctAnswers.push(stringCorrectAnswer);
   });
   return correctAnswers;
 }
 
-const arrayCorrectAnswers = getCorrectAnswersArray(arrayOfExpressions);
+const correctAnswers = getCorrectAnswers(randomPartsOfTheExpressions);
 
-function getQuestions(twoDimensionsArray) {
+function getQuestions(partsOfTheExpressions) {
   const questions = [];
-  twoDimensionsArray.forEach((partOfExpression) => {
-    const [firstNumber, operator, secondNumber] = partOfExpression;
+  partsOfTheExpressions.forEach((partsOfExpression) => {
+    const [firstNumber, operator, secondNumber] = partsOfExpression;
     questions.push(`Question: ${firstNumber} ${operator} ${secondNumber}`);
   });
   return questions;
 }
 
-const questions = getQuestions(arrayOfExpressions);
+const questions = getQuestions(randomPartsOfTheExpressions);
 
 function calc() {
-  engine(rules, arrayCorrectAnswers, questions);
+  engine(rule, correctAnswers, questions);
 }
 
 export default calc;

@@ -1,46 +1,47 @@
 import { engine, randomNumber } from '../src/index.js';
 
-const rules = 'Answer "yes" if the number is even, otherwise answer "no".';
+const rule = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-function getRandomNumbersArray() {
-  const randomNumbersArray = [];
+function getRandomNumbers() {
+  const randomNumbers = [];
   let count = 0;
   while (count < 3) {
-    randomNumbersArray.push(randomNumber(100));
+    randomNumbers.push(randomNumber(100));
     count += 1;
   }
-  return randomNumbersArray;
+  return randomNumbers;
 }
 
-const numbersArray = getRandomNumbersArray();
+const randomNumbers = getRandomNumbers();
 
-function getCorrectAnswer(number) {
-  const result = number % 2 === 0 ? 'yes' : 'no';
+function isEven(number) {
+  const result = number % 2 === 0;
   return result;
 }
 
-function getArrayCorrectAnswers(arr) {
-  const arrayCorrectAnswers = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    arrayCorrectAnswers.push(getCorrectAnswer(arr[i]));
-  }
-  return arrayCorrectAnswers;
+function getCorrectAnswers(numbers) {
+  const correctAnswers = [];
+  numbers.forEach((number) => {
+    const correctAnswer = isEven(number) ? 'yes' : 'no';
+    correctAnswers.push(correctAnswer);
+  });
+  return correctAnswers;
 }
 
-const arrayCorrectAnswers = getArrayCorrectAnswers(numbersArray);
+const correctAnswers = getCorrectAnswers(randomNumbers);
 
-function evenQuestions(arr) {
-  const questionsArray = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    questionsArray.push(`Question: ${arr[i]}`);
+function getQuestions(numbers) {
+  const questions = [];
+  for (let i = 0; i < numbers.length; i += 1) {
+    questions.push(`Question: ${numbers[i]}`);
   }
-  return questionsArray;
+  return questions;
 }
 
-const questions = evenQuestions(numbersArray);
+const questions = getQuestions(randomNumbers);
 
 function even() {
-  engine(rules, arrayCorrectAnswers, questions);
+  engine(rule, correctAnswers, questions);
 }
 
 export default even;
